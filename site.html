@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Группа ЗЧС-25р — Учебный портал</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #0F1115;
+      --bg-card: #181B22;
+      --bg-input: #21252F;
+      --accent-blue: #4F46E5;
+      --accent-hover: #6366F1;
+      --accent-pink: #E1306C;
+      --accent-light: rgba(79, 70, 229, 0.15);
+      --text-main: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-bright: rgba(99, 102, 241, 0.4);
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-main);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2B303C;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-blue);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 17, 21, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      color: var(--accent-blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .header-socials {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-insta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .btn-insta:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      padding: 40px 5% 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #FFF, var(--text-muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .today-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-light);
+      border: 1px solid var(--border-bright);
+      color: #A5B4FC;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 15px;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    /* Section Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-title i {
+      color: var(--accent-blue);
+    }
+
+    .leaders-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .leader-card {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .leader-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      border: 1px solid var(--border-bright);
+      color: var(--accent-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .leader-info .role {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .leader-info .name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 2px;
+    }
+
+    .teachers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
+    }
+
+    .teacher-item {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
+
+    .teacher-item i {
+      color: var(--accent-blue);
+    }
+
+    .btn-toggle {
+      background: var(--bg-input);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-toggle:hover {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+
+    /* Schedule Tables */
+    .schedule-day {
+      margin-bottom: 25px;
+    }
+
+    .schedule-day:last-child {
+      margin-bottom: 0;
+    }
+
+    .day-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #A5B4FC;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .time-col {
+      white-space: nowrap;
+      font-weight: 600;
+      color: var(--accent-hover);
+      width: 130px;
+    }
+
+    .pair-num {
+      width: 60px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .teacher-col {
+      color: var(--text-muted);
+      width: 220px;
+    }
+
+    /* Duty Section */
+    .duty-box {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .duty-names {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .duty-date {
+      color: var(--accent-hover);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .duty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .duty-item {
+      background: var(--bg-input);
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .duty-item.active-duty {
+      border-color: var(--border-bright);
+      background: var(--accent-light);
+    }
+
+    /* Students List */
+    .search-box {
+      margin-bottom: 15px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 16px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-size: 0.9rem;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent-blue);
+    }
+
+    .students-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+    }
+
+    .student-card {
+      background: var(--bg-input);
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.88rem;
+    }
+
+    .student-card.head-student {
+      border-color: var(--border-bright);
+      background: rgba(79, 70, 229, 0.08);
+    }
+
+    .student-num {
+      color: var(--text-muted);
+      font-weight: 600;
+      width: 24px;
+    }
+
+    .head-badge {
+      font-size: 0.7rem;
+      background: var(--accent-blue);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: auto;
+      font-weight: 600;
+    }
+
+    /* Call Times Table */
+    .calls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+    }
+
+    .call-item {
+      background: var(--bg-input);
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+    }
+
+    .call-item span:first-child {
+      color: var(--text-muted);
+    }
+
+    .call-item span:last-child {
+      font-weight: 600;
+      color: var(--accent-hover);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .btn-toggle {
+        width: 100%;
+        justify-content: center;
+      }
+      .duty-box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="#" class="logo">
+      <i class="fa-solid fa-graduation-cap"></i> ЗЧС-25р Портал
+    </a>
+    <ul class="nav-links">
+      <li><a href="#leadership-section">Руководство</a></li>
+      <li><a href="#schedule-section">Расписание</a></li>
+      <li><a href="#duty-section">Дежурства</a></li>
+      <li><a href="#calls-section">Звонки</a></li>
+      <li><a href="#students-section">Студенты</a></li>
+    </ul>
+    <div class="header-socials">
+      <a href="https://www.instagram.com/apvkzchsa25?stkn=cDY0dGEwdTIxNmQ5" target="_blank" class="btn-insta">
+        <i class="fa-brands fa-instagram"></i> Группа
+      </a>
+      <a href="https://www.instagram.com/atyrau_polytechnic?stkn=MTNoYjBvM3NycXE4cw==" target="_blank" class="btn-insta">
+        <i class="fa-brands fa-instagram"></i> Колледж
+      </a>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h1 class="hero-title">Группа ЗЧС-25р (2 ауысым)</h1>
+    <p class="hero-subtitle">Информационный портал специальности «Защита в чрезвычайных ситуациях»</p>
+    <div class="today-badge" id="today-badge">
+      <i class="fa-regular fa-calendar"></i> <span id="current-date-str">Загрузка даты...</span>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="card" id="leadership-section">
+      <div class="card-header">
+        <div class="card-title">
+          <i class="fa-solid fa-user-gear"></i> Руководство группы
+        </div>
+      </div>
+      <div class="leaders-grid">
+        <div class="leader-card">
+          <div class="leader-icon">
+            <i class="fa-solid fa-user-tie"></i>
+          </div>
+          <div class="leader-info">
+            <div class="role">Куратор группы</div>
+            <div class="name">Уразгалиева Жанылсин Уразбайевна</div>
+          </div>
+        </div>
+        <div class="leader-card">
+          <div class="leader-icon">
+            <i class="fa-solid fa-user-ninja"></i>
+          </div>
+          <div class="leader-info">
+            <div class="role">Староста группы</div>
+            <div class="name">Темірболат Әмір Жамбылұлы</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <i class="fa-solid fa-chalkboard-user"></i> Преподавательский состав
+        </div>
+      </div>
+      <div class="teachers-grid">
+        <div class="teacher-item"><i class="fa-solid fa-id-badge"></i> Кәрімова Мәдина Ғарифоллақызы</div>
+        <div class="teacher-item"><i class="fa-solid fa-id-badge"></i> Ғафурқызы Нұржаннат</div>
+        <div class="teacher-item"><i class="fa-solid fa-id-badge"></i> Серікова Әсемгүл Маратқызы</div>
+        <div class="teacher-item"><i class="fa-solid fa-id-badge"></i> Нурханов Орынбасар Даулетович</div>
+        <div class="teacher-item"><i class="fa-solid fa-id-badge"></i> Уразгалиева Жанылсин Уразбайевна</div>
+      </div>
+    </div>
+
+    <div class="card" id="schedule-section">
+      <div class="card-header">
+        <div class="card-title">
+          <i class="fa-regular fa-clock"></i> Расписание занятий
+        </div>
+        <button class="btn-toggle" onclick="toggleFullSchedule()" id="btn-schedule-toggle">
+          <i class="fa-solid fa-list-ul"></i> Показать полное расписание на неделю
+        </button>
+      </div>
+
+      <div id="schedule-container">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+
+    <div class="card" id="duty-section">
+      <div class="card-header">
+        <div class="card-title">
+          <i class="fa-solid fa-user-shield"></i> График дежурств
+        </div>
+        <button class="btn-toggle" onclick="toggleFullDuty()" id="btn-duty-toggle">
+          <i class="fa-regular fa-calendar-days"></i> Показать все дежурства до конца декабря
+        </button>
+      </div>
+
+      <div id="duty-today-container">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div id="duty-full-container" class="duty-grid hidden">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+
+    <div class="card" id="calls-section">
+      <div class="card-header">
+        <div class="card-title">
+          <i class="fa-solid fa-bell"></i> Расписание звонков (2 ауысым)
+        </div>
+      </div>
+      <div class="calls-grid">
+        <div class="call-item"><span>0 пара:</span> <span>12:45 — 13:25</span></div>
+        <div class="call-item"><span>1 пара:</span> <span>13:30 — 14:10</span></div>
+        <div class="call-item"><span>2 пара:</span> <span>14:15 — 14:55</span></div>
+        <div class="call-item"><span>3 пара:</span> <span>15:00 — 15:40</span></div>
+        <div class="call-item"><span>4 пара:</span> <span>15:45 — 16:25</span></div>
+        <div class="call-item"><span>5 пара:</span> <span>16:35 — 17:15</span></div>
+        <div class="call-item"><span>6 пара:</span> <span>17:20 — 18:00</span></div>
+        <div class="call-item"><span>7 пара:</span> <span>18:05 — 18:45</span></div>
+      </div>
+    </div>
+
+    <div class="card" id="students-section">
+      <div class="card-header">
+        <div class="card-title">
+          <i class="fa-solid fa-users"></i> Список студентов (25)
+        </div>
+      </div>
+
+      <div class="search-box">
+        <input type="text" id="student-search" placeholder="Поиск студента по имени или фамилии..." oninput="filterStudents()">
+      </div>
+
+      <div class="students-grid" id="students-container">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+
+    // 1. Full Students List (Exact 25 students, #20 is Head Student)
+    const students = [
+      "Бисенгалиев Әсет",
+      "Булат Бейбіт Бауыржанұлы",
+      "Дауылбай Али Асланұлы",
+      "Дюсекенов Бексатхан Серикович",
+      "Елемесов Абылай Ербулатович",
+      "Жексенбайұлы Шәкәрім",
+      "Кадыргали Адилхан айбекұлы",
+      "Кабер Аружан Ерболатқызы",
+      "Казбөлек Ислам Жасұланұлы",
+      "Койчиев Богдан Витальевич",
+      "Куанышев Дамир Ерболатович",
+      "Қуаныш Мұхамед Айқынұлы",
+      "Құрмет Мустафа Ұзақбайұлы",
+      "Митрясова Александра Михайловна",
+      "Попова Карина Александровна",
+      "Сарсенов Назар Азаматович",
+      "Серик Әлнұр Қуанышұлы",
+      "Серик Мұхаммад Бауыржанұлы",
+      "Сейдаметов Исмаил Рефатович",
+      "Темірболат Әмір Жамбылұлы", // #20 Староста
+      "Тынышбай Батырбек Мейрамбекұлы",
+      "Плеханов Виктор Вячеславович",
+      "Фофонова Валерия Викторовна",
+      "Цой Иса Русланович",
+      "Тухватуллин Таұрат Фархатович"
+    ];
+
+    // 2. Full Weekly Schedule Data with Full Teacher Names
+    const scheduleData = {
+      1: {
+        dayName: "Дүйсенбі (Понедельник)",
+        pairs: [
+          { num: "0", time: "12:45-13:25", subject: "ПМ 1 Обеспечение режима работы и отдыха спасателя (РО 1.1)", teacher: "Уразгалиева Ж.У." },
+          { num: "1", time: "13:30-14:10", subject: "ПМ 1 Обеспечение режима работы и отдыха спасателя (РО 1.2)", teacher: "Кәрімова М.Ғ." },
+          { num: "2", time: "14:15-14:55", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.2)", teacher: "Ғафурқызы Н." },
+          { num: "3", time: "15:00-15:40", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.2)", teacher: "Ғафурқызы Н." },
+          { num: "4", time: "15:45-16:25", subject: "БМ 1 Развитие и совершенствование физических качеств (РО 1.1)", teacher: "Нурханов О.Д." },
+          { num: "5", time: "16:35-17:15", subject: "БМ 1 Развитие и совершенствование физических качеств (РО 1.1)", teacher: "Нурханов О.Д." },
+          { num: "6", time: "17:20-18:00", subject: "ПМ 1 Обеспечение режима работы и отдыха спасателя (РО 1.2)", teacher: "Кәрімова М.Ғ." },
+          { num: "7", time: "18:05-18:45", subject: "ПМ 1 Обеспечение режима работы и отдыха спасателя (РО 1.2)", teacher: "Кәрімова М.Ғ." }
+        ]
+      },
+      2: {
+        dayName: "Сейсенбі (Вторник)",
+        pairs: [
+          { num: "1", time: "13:30-14:10", subject: "БМ 1 Развитие и совершенствование физических качеств (РО 1.1)", teacher: "Нурханов О.Д." },
+          { num: "2", time: "14:15-14:55", subject: "БМ 1 Развитие и совершенствование физических качеств (РО 1.1)", teacher: "Нурханов О.Д." },
+          { num: "3", time: "15:00-15:40", subject: "ПМ 1 Обеспечение режима работы и отдыха спасателя (РО 1.2)", teacher: "Кәрімова М.Ғ." },
+          { num: "4", time: "15:45-16:25", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.1)", teacher: "Кәрімова М.Ғ." },
+          { num: "5", time: "16:35-17:15", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.1)", teacher: "Кәрімова М.Ғ." },
+          { num: "6", time: "17:20-18:00", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.4)", teacher: "Серікова Ә.М." },
+          { num: "7", time: "18:05-18:45", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.4)", teacher: "Серікова Ә.М." }
+        ]
+      },
+      3: {
+        dayName: "Сәрсенбі (Среда)",
+        pairs: [
+          { num: "1", time: "13:30-14:10", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.2)", teacher: "Ғафурқызы Н." },
+          { num: "2", time: "14:15-14:55", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.2)", teacher: "Ғафурқызы Н." },
+          { num: "3", time: "15:00-15:40", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.1)", teacher: "Кәрімова М.Ғ." },
+          { num: "4", time: "15:45-16:25", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.1)", teacher: "Кәрімова М.Ғ." },
+          { num: "5", time: "16:35-17:15", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.3)", teacher: "Ғафурқызы Н." },
+          { num: "6", time: "17:20-18:00", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.3)", teacher: "Ғафурқызы Н." },
+          { num: "7", time: "18:05-18:45", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.1)", teacher: "Кәрімова М.Ғ." }
+        ]
+      },
+      4: {
+        dayName: "Бейсенбі (Четверг)",
+        pairs: [
+          { num: "1", time: "13:30-14:10", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.4)", teacher: "Серікова Ә.М." },
+          { num: "2", time: "14:15-14:55", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.4)", teacher: "Серікова Ә.М." },
+          { num: "3", time: "15:00-15:40", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.3)", teacher: "Ғафурқызы Н." },
+          { num: "4", time: "15:45-16:25", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.3)", teacher: "Ғафурқызы Н." },
+          { num: "5", time: "16:35-17:15", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.1)", teacher: "Кәрімова М.Ғ." },
+          { num: "6", time: "17:20-18:00", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.1)", teacher: "Кәрімова М.Ғ." },
+          { num: "7", time: "18:05-18:45", subject: "ПМ 1 Обеспечение режима работы и отдыха спасателя (РО 1.1)", teacher: "Уразгалиева Ж.У." }
+        ]
+      },
+      5: {
+        dayName: "Жұма (Пятница)",
+        pairs: [
+          { num: "1", time: "13:30-14:10", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.3)", teacher: "Ғафурқызы Н." },
+          { num: "2", time: "14:15-14:55", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.3)", teacher: "Ғафурқызы Н." },
+          { num: "3", time: "15:00-15:40", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.1)", teacher: "Кәрімова М.Ғ." },
+          { num: "4", time: "15:45-16:25", subject: "ПМ 1 Обеспечение режима работы и отдыха спасателя (РО 1.1)", teacher: "Уразгалиева Ж.У." },
+          { num: "5", time: "16:35-17:15", subject: "ПМ 1 Обеспечение режима работы и отдыха спасателя (РО 1.1)", teacher: "Уразгалиева Ж.У." },
+          { num: "6", time: "17:20-18:00", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.3)", teacher: "Ғафурқызы Н." },
+          { num: "7", time: "18:05-18:45", subject: "ПМ 2 Подготовка к работе аварийно-спасательных средств (РО 2.3)", teacher: "Ғафурқызы Н." }
+        ]
+      }
+    };
+
+    // 3. Duty Rotation Groups (11 pairs/groups)
+    const dutyPairs = [
+      "Бейбыт — Шакарим",
+      "Батырбек — Адильхан",
+      "Мухаммед — Асет",
+      "Мухаммад — Ислам",
+      "Альнур — Бексатхан",
+      "Али — Иса",
+      "Назар — Мустафа",
+      "Амир — Дамир",
+      "Исмаил — Богдан",
+      "Виктор — Абылай",
+      "Таурат"
+    ];
+
+    let fullDutySchedule = [];
+
+    function generateDutySchedule() {
+      let startDate = new Date(2026, 8, 25);
+      let endDate = new Date(2026, 11, 31);
+      let dutyIndex = 5;
+
+      let current = new Date(startDate);
+      while (current <= endDate) {
+        let dayOfWeek = current.getDay();
+        if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+          let dateStr = formatDate(current);
+          fullDutySchedule.push({
+            dateStr: dateStr,
+            dateObj: new Date(current),
+            names: dutyPairs[dutyIndex % dutyPairs.length]
+          });
+          dutyIndex++;
+        }
+        current.setDate(current.getDate() + 1);
+      }
+    }
+
+    function formatDate(d) {
+      let day = String(d.getDate()).padStart(2, '0');
+      let month = String(d.getMonth() + 1).padStart(2, '0');
+      let year = String(d.getFullYear()).slice(-2);
+      return `${day}.${month}.${year}`;
+    }
+
+    let isFullScheduleVisible = false;
+    let isFullDutyVisible = false;
+
+    const today = new Date();
+    const currentDayOfWeek = today.getDay();
+
+    function init() {
+      generateDutySchedule();
+      renderStudents();
+      renderCurrentDateBadge();
+      renderSchedule();
+      renderDuty();
+    }
+
+    function renderCurrentDateBadge() {
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('current-date-str').innerText = today.toLocaleDateString('ru-RU', options);
+    }
+
+    function renderSchedule() {
+      const container = document.getElementById('schedule-container');
+      container.innerHTML = '';
+
+      if (isFullScheduleVisible) {
+        for (let day = 1; day <= 5; day++) {
+          container.appendChild(createScheduleTable(scheduleData[day]));
+        }
+      } else {
+        let targetDay = (currentDayOfWeek === 0 || currentDayOfWeek === 6) ? 1 : currentDayOfWeek;
+        let prefixNote = (currentDayOfWeek === 0 || currentDayOfWeek === 6) ? "(Сегодня выходной — расписание на ближайший понедельник)" : "(Сегодня)";
+        
+        let dayObj = JSON.parse(JSON.stringify(scheduleData[targetDay]));
+        dayObj.dayName += ` ${prefixNote}`;
+        container.appendChild(createScheduleTable(dayObj));
+      }
+    }
+
+    function createScheduleTable(dayData) {
+      const dayDiv = document.createElement('div');
+      dayDiv.className = 'schedule-day';
+
+      let html = `<div class="day-title"><i class="fa-regular fa-calendar-check"></i> ${dayData.dayName}</div>`;
+      html += `<div class="table-wrapper"><table><thead><tr>
+        <th class="pair-num">Пара</th>
+        <th class="time-col">Время</th>
+        <th>Предмет</th>
+        <th class="teacher-col">Преподаватель</th>
+      </tr></thead><tbody>`;
+
+      dayData.pairs.forEach(p => {
+        html += `<tr>
+          <td class="pair-num">${p.num}</td>
+          <td class="time-col">${p.time}</td>
+          <td><strong>${p.subject}</strong></td>
+          <td class="teacher-col">${p.teacher}</td>
+        </tr>`;
+      });
+
+      html += `</tbody></table></div>`;
+      dayDiv.innerHTML = html;
+      return dayDiv;
+    }
+
+    function toggleFullSchedule() {
+      isFullScheduleVisible = !isFullScheduleVisible;
+      const btn = document.getElementById('btn-schedule-toggle');
+      if (isFullScheduleVisible) {
+        btn.innerHTML = `<i class="fa-solid fa-compress"></i> Свернуть до сегодняшнего дня`;
+      } else {
+        btn.innerHTML = `<i class="fa-solid fa-list-ul"></i> Показать полное расписание на неделю`;
+      }
+      renderSchedule();
+    }
+
+    function renderDuty() {
+      const todayStr = formatDate(today);
+      const todayContainer = document.getElementById('duty-today-container');
+      const fullContainer = document.getElementById('duty-full-container');
+
+      let currentDuty = fullDutySchedule.find(d => d.dateStr === todayStr);
+
+      if (!currentDuty) {
+        currentDuty = fullDutySchedule.find(d => d.dateObj >= today) || fullDutySchedule[0];
+      }
+
+      todayContainer.innerHTML = `
+        <div class="duty-box">
+          <div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">Дежурные ${currentDuty.dateStr === todayStr ? 'на сегодня' : 'на ближайший учебный день'}:</div>
+            <div class="duty-names">${currentDuty.names}</div>
+          </div>
+          <div class="duty-date">${currentDuty.dateStr}</div>
+        </div>
+      `;
+
+      fullContainer.innerHTML = '';
+      fullDutySchedule.forEach(item => {
+        const div = document.createElement('div');
+        let isToday = item.dateStr === todayStr;
+        div.className = `duty-item ${isToday ? 'active-duty' : ''}`;
+        div.innerHTML = `<span>${item.names}</span> <strong>${item.dateStr}</strong>`;
+        fullContainer.appendChild(div);
+      });
+    }
+
+    function toggleFullDuty() {
+      isFullDutyVisible = !isFullDutyVisible;
+      const fullContainer = document.getElementById('duty-full-container');
+      const btn = document.getElementById('btn-duty-toggle');
+
+      if (isFullDutyVisible) {
+        fullContainer.classList.remove('hidden');
+        btn.innerHTML = `<i class="fa-solid fa-compress"></i> Скрыть полный график`;
+      } else {
+        fullContainer.classList.add('hidden');
+        btn.innerHTML = `<i class="fa-regular fa-calendar-days"></i> Показать все дежурства до конца декабря`;
+      }
+    }
+
+    function renderStudents(filter = "") {
+      const container = document.getElementById('students-container');
+      container.innerHTML = '';
+
+      students.forEach((name, index) => {
+        if (name.toLowerCase().includes(filter.toLowerCase())) {
+          const div = document.createElement('div');
+          const isHead = (index + 1) === 20;
+          div.className = `student-card ${isHead ? 'head-student' : ''}`;
+          
+          div.innerHTML = `
+            <span class="student-num">${index + 1}.</span>
+            <span>${name}</span>
+            ${isHead ? '<span class="head-badge">Староста</span>' : ''}
+          `;
+          container.appendChild(div);
+        }
+      });
+    }
+
+    function filterStudents() {
+      const text = document.getElementById('student-search').value;
+      renderStudents(text);
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
